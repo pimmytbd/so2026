@@ -1,0 +1,44 @@
+name: Organize files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  organize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create folders and move files
+        run: |
+          mkdir -p 2022/aw-banner 2022/aw-publication
+          mkdir -p 2024/aw-banner 2024/aw-publication
+          mkdir -p 2026/aw-banner 2026/aw-chapter 2026/aw-publication 2026/figure
+          git mv "SO 2022_Banner_Home.jpg" "2022/aw-banner/"
+          git mv "SO 2022_Publication Cover.jpg" "2022/aw-publication/"
+          git mv "SO 2024_Banner_Home.jpg" "2024/aw-banner/"
+          git mv "SO 2024_Publication Cover.jpg" "2024/aw-publication/"
+          git mv "SO 2026_Banner_Data and Research.jpg" "2026/aw-banner/"
+          git mv "SO 2026_Banner_Home.jpg" "2026/aw-banner/"
+          git mv "SO 2026_Banner_Media.jpg" "2026/aw-banner/"
+          git mv "SO 2026_Banner_Publications.jpg" "2026/aw-banner/"
+          git mv "SO 2026_Home Icon.png" "2026/aw-banner/"
+          git mv "SO 2026_Chapter_01.jpg" "2026/aw-chapter/"
+          git mv "SO 2026_Chapter_02.jpg" "2026/aw-chapter/"
+          git mv "SO 2026_Chapter_03.jpg" "2026/aw-chapter/"
+          git mv "SO 2026_Chapter_04.jpg" "2026/aw-chapter/"
+          git mv "SO 2026_Execlutive Summary.jpg" "2026/aw-chapter/"
+          git mv "SO 2026_Introduction.jpg" "2026/aw-chapter/"
+          git mv "SO 2026_Publication Cover.jpg" "2026/aw-publication/"
+          git mv "SO 2026_Publication.jpg" "2026/aw-publication/"
+          git mv Chp*.svg 2026/figure/
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git commit -m "Organize files into year/category folder structure"
+          git push
+      - name: Delete workflow file
+        run: |
+          git rm .github/workflows/organize.yml
+          git commit -m "Remove organize workflow"
+          git push
