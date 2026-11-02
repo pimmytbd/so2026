@@ -1,7 +1,12 @@
 name: Organize files
 
+
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write
+
 
 jobs:
   organize:
@@ -34,11 +39,4 @@ jobs:
       - name: Commit and push
         run: |
           git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git commit -m "Organize files into year/category folder structure"
-          git push
-      - name: Delete workflow file
-        run: |
-          git rm .github/workflows/organize.yml
-          git commit -m "Remove organize workflow"
-          git push
+
